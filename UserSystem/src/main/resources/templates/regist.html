@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+<form method="post">
+    用户名:<input type="text" name="username" th:value="${user.username}"/><br />
+    密码:<input type="text" name="password"  th:value="${user.password}"/><br />
+    邮箱<input type="text" name="email"   th:value="${user.email}" /><br />
+    验证码<input type="text" name="code" />
+    <button id="getcode" th:attr="url=@{/getcode}">获取验证码 </button><button id="regist" th:attr="url=@{/register}">注册</button>
+</form>
+<p th:text="${msg}" th:if="${msg!=null}"></p>
+</body>
+<script src="/js/jquery-1.10.1.min.js"></script>
+<script>
+    $(function () {
+        $("#getcode").click(function () {
+            $("form").attr("action",$(this).attr("url")).submit();
+        });
+        $("#regist").click(function () {
+            $("form").attr("action",$(this).attr("url")).submit();
+        });
+    });
+</script>
+</html>

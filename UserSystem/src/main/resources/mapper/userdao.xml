@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.dao.UserDao">
+
+    <!--添加用户-->
+    <insert id="addUser">
+        insert  into user(username,password,role,email) values(#{username},#{password},#{role},#{email})
+    </insert>
+
+    <!-- User checkUser(User user);-->
+    <select id="checkUser" resultType="com.spring.domain.User">
+        select * from user where username=#{username} and password=#{password}
+    </select>
+
+    <!--//检验用户名是否注册
+    User isRegisted();-->
+
+    <select id="isRegisted" resultType="com.spring.domain.User">
+        select * from user where username=#{username}
+    </select>
+
+    <!-- //删除用户
+    void deleteUser(Integer uid);-->
+    <delete id="deleteUser">
+        delete from user where username=#{username}
+    </delete>
+
+    <!--  //修改信息
+    void updateUser(User user);-->
+    <update id="updateUser">
+        update user
+        <set>
+            <if test="username!=null">
+                username=#{username},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="role!=null">
+                role=#{role},
+            </if>
+            <if test="email!=null">
+                email=#{email},
+            </if>
+        </set>
+        where uid=#{uid}
+    </update>
+</mapper>
